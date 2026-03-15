@@ -51,14 +51,16 @@
             },
             {
                 "id": "ToDoForm",
-                "title": { "default": "ToDo"
+                "title": {
+                    "default": "ToDo"
                 },
                 "url": "/todo",
                 "formFieldList": [
                     {
                         "id": "title",
                         "type": "text",
-                        "name": { "default": "Titel"
+                        "name": {
+                            "default": "Titel"
                         },
                         "required": true,
                         "width": 2
@@ -66,7 +68,49 @@
                     {
                         "id": "description",
                         "type": "text",
-                        "name": { "default": "Text"
+                        "name": {
+                            "default": "Text"
+                        },
+                        "newRow": true,
+                        "maxLength": 4000,
+                        "height": 4,
+                        "width": 2
+                    },
+                    {
+                        "type": "deleteButton",
+                        "name": "Delete"
+                    },
+                    {
+                        "type": "cancelButton",
+                        "name": "Cancel"
+                    },
+                    {
+                        "type": "okButton",
+                        "name": "Ok"
+                    }
+                ]
+            },
+            {
+                "id": "ModuleForm",
+                "title": {
+                    "default": "Module"
+                },
+                "url": "/module",
+                "formFieldList": [
+                    {
+                        "id": "name",
+                        "type": "text",
+                        "name": {
+                            "default": "Modulname"
+                        },
+                        "required": true,
+                        "width": 2
+                    },
+                    {
+                        "id": "description",
+                        "type": "text",
+                        "name": {
+                            "default": "Beschreibung"
                         },
                         "newRow": true,
                         "maxLength": 4000,
@@ -100,13 +144,24 @@
                     },
                     {
                         "type": "button",
-                        "name": { "default": "ToDo-List"
+                        "name": {
+                            "default": "ToDo-List"
                         },
                         "icon": "fa-file-alt",
                         "color": "wet-asphalt",
                         "page": "toDoPage",
                         "width": 2,
                         "newRow": true
+                    },
+                    {
+                        "type": "button",
+                        "name": {
+                            "default": "Module"
+                        },
+                        "icon": "fa-cube",
+                        "color": "peterriver",
+                        "page": "modulePage",
+                        "width": 2
                     }
                 ]
             },
@@ -118,7 +173,8 @@
                     },
                     {
                         "type": "newButton",
-                        "name": { "default": "Neues ToDo"
+                        "name": {
+                            "default": "Neues ToDo"
                         },
                         "icon": "fa-user",
                         "color": "green",
@@ -136,6 +192,37 @@
                         "url": "/todo",
                         "form": {
                             "form": "ToDoForm"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "modulePage",
+                "elementList": [
+                    {
+                        "type": "backbutton"
+                    },
+                    {
+                        "type": "newButton",
+                        "name": {
+                            "default": "Neues Modul"
+                        },
+                        "icon": "fa-cube",
+                        "color": "green",
+                        "width": 2,
+                        "form": {
+                            "form": "ModuleForm"
+                        }
+                    },
+                    {
+                        "type": "list",
+                        "name": "Module",
+                        "icon": "fa-cube",
+                        "color": "wet-asphalt",
+                        "search": true,
+                        "url": "/module",
+                        "form": {
+                            "form": "ModuleForm"
                         }
                     }
                 ]
