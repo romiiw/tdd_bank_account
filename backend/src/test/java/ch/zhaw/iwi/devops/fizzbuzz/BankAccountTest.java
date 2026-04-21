@@ -8,7 +8,7 @@ public class BankAccountTest {
     @Test
     void testInitialBalance() {
         BankAccount account = new BankAccount(100, 50);
-        Assertions.assertEquals(100, account.getBalance());
+        Assertions.assertEquals(100.0, account.getBalance(), 0.0001);
 
     }
 
@@ -16,7 +16,7 @@ public class BankAccountTest {
     void testDeposit() {
         BankAccount account = new BankAccount(100, 50);
         account.deposit(50);
-        Assertions.assertEquals(150, account.getBalance());
+        Assertions.assertEquals(150.0, account.getBalance(), 0.0001);
     }
 
     @Test
@@ -29,14 +29,14 @@ public class BankAccountTest {
     void testWithdraw() {
         BankAccount account = new BankAccount(100, 50);
         account.withdraw(30);
-        Assertions.assertEquals(70, account.getBalance());
+        Assertions.assertEquals(70.0, account.getBalance(), 0.0001);
     }
 
     @Test
     void testWithdrawOverdraftAllowed() {
         BankAccount account = new BankAccount(100, 50);
         account.withdraw(120);
-        Assertions.assertEquals(-20, account.getBalance());
+        Assertions.assertEquals(-20.0, account.getBalance(), 0.0001);
     }
 
     @Test
@@ -58,8 +58,8 @@ public class BankAccountTest {
 
         sender.transfer(receiver, 30);
 
-        Assertions.assertEquals(70, sender.getBalance());
-        Assertions.assertEquals(80, receiver.getBalance());
+        Assertions.assertEquals(70.0, sender.getBalance(), 0.0001);
+        Assertions.assertEquals(80.0, receiver.getBalance(), 0.0001);
     }
 
 }

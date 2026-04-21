@@ -28,18 +28,18 @@ public class ModuleController {
         System.out.println("Init Data");
     }
 
-    @GetMapping("/test")
+    @GetMapping("/module/test")
     public String test() {
         return "Module app is up and running!";
     }
 
-    @GetMapping("/services/ping")
+    @GetMapping("/services/module/ping")
     public String ping() {
         String languageCode = "de";
-        return "{ \"status\": \"ok\", \"userId\": \"admin"+ "\", \"languageCode\": \"" + languageCode + "\",\"version\": \"0.0.2" + "\"}";
+        return "{ \"status\": \"ok\", \"userId\": \"admin"+ \"\", \"languageCode\": \"" + languageCode + "\",\"version\": \"0.0.2" + "\"}";
     }
 
-    @GetMapping("/count")
+    @GetMapping("/module/count")
     public int count() {
         return this.modules.size();
     }
