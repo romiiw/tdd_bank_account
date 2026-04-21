@@ -9,7 +9,12 @@ public class BankAccountTest {
     void testInitialBalance() {
         BankAccount account = new BankAccount(100, 50);
         Assertions.assertEquals(100.0, account.getBalance(), 0.0001);
+    }
 
+    @Test
+    void testConstructorNegativeBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new BankAccount(-10, 50));
     }
 
     @Test
@@ -23,6 +28,12 @@ public class BankAccountTest {
     void testDepositNegative() {
         BankAccount account = new BankAccount(100, 50);
         Assertions.assertThrows(IllegalArgumentException.class, () -> account.deposit(-10));
+    }
+
+    @Test
+    void testDepositZero() {
+        BankAccount account = new BankAccount(100, 50);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> account.deposit(0));
     }
 
     @Test
@@ -40,6 +51,13 @@ public class BankAccountTest {
     }
 
     @Test
+    void testWithdrawOverdraftBoundary() {
+        BankAccount account = new BankAccount(100, 50);
+        account.withdraw(150); // exakt Grenze
+        Assertions.assertEquals(-50.0, account.getBalance(), 0.0001);
+    }
+
+    @Test
     void testWithdrawOverdraftExceeded() {
         BankAccount account = new BankAccount(100, 50);
         Assertions.assertThrows(IllegalArgumentException.class, () -> account.withdraw(200));
@@ -49,6 +67,12 @@ public class BankAccountTest {
     void testWithdrawNegative() {
         BankAccount account = new BankAccount(100, 50);
         Assertions.assertThrows(IllegalArgumentException.class, () -> account.withdraw(-5));
+    }
+
+    @Test
+    void testWithdrawZero() {
+        BankAccount account = new BankAccount(100, 50);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> account.withdraw(0));
     }
 
     @Test
@@ -62,4 +86,30 @@ public class BankAccountTest {
         Assertions.assertEquals(80.0, receiver.getBalance(), 0.0001);
     }
 
+    @Test
+    void testTransferTargetNull() {
+        BankAccount sender = new BankAccount(100, 50);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> sender.transfer(null, 10));
+    }
+
+    @Test
+    void testTransferAmountZero() {
+        BankAccount sender = new BankAccount(100, 50);
+        BankAccount receiver = new BankAccount(50, 50);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> sender.transfer(receiver, 0));
+    }
+
+    // 🆕 Neuer wichtiger Test (für bessere Coverage)
+    @Test
+    void testTransferOverdraftExceeded() {
+        BankAccount sender = new BankAccount(100, 50);
+        BankAccount receiver = new BankAccount(50, 50);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> sender.transfer(receiver, 200));
+    }
 }
