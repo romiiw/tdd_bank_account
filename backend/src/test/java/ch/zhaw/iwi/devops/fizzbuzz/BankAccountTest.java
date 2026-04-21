@@ -103,7 +103,7 @@ public class BankAccountTest {
                 () -> sender.transfer(receiver, 0));
     }
 
-    // 🆕 Neuer wichtiger Test (für bessere Coverage)
+    // Neuer Test (für bessere Coverage)
     @Test
     void testTransferOverdraftExceeded() {
         BankAccount sender = new BankAccount(100, 50);
