@@ -54,3 +54,21 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+
+jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    privileged: true
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      # Das ist die entscheidende Brücke für macOS:
+      - /Users/simon/.docker/run/docker.sock:/var/run/docker.sock
+    networks:
+      - default
+
+volumes:
+  jenkins_home:
