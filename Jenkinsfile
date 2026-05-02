@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') { 
             steps {
                 sh 'echo checkout'
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub-mosazhaw', url: 'https://github.com/devopszhaw/DevOpsDemo']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub-romiiw', url: 'https://github.com/romiiw/tdd_bank_account']])
             }
         }
         stage('Build') { 
