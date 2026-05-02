@@ -42,7 +42,7 @@ pipeline {
         stage('Docker') {
             steps {
                 sh '''
-                    export DOCKER_HOST=tcp://host.docker.internal:2375
+                    export DOCKER_HOST=tcp://172.17.0.2:2375
                     docker build -t mosazhaw/devopsdemo .
                 '''
             }
