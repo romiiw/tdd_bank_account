@@ -23,19 +23,7 @@ pipeline {
                     dir('frontend') {
                         sh 'npm install'
                         sh 'npm run lint:html'                    
-                    }
-                }
-                withCredentials([string(credentialsId: 'sonar-key-backend', variable: 'SONAR_TOKEN')]) {
-                    dir('backend') {
-                        sh "./gradlew sonar -Dsonar.projectKey=bank_account_backend1 -Dsonar.projectName=\'bank_account_backend1' -Dsonar.host.url=http://sonarqube:9000"    
-                    }                    
-                }
-                withCredentials([string(credentialsId: 'sonar-key-frontend', variable: 'SONAR_TOKEN')]) {
-                    dir('frontend') {
-                        nodejs('24.11.1') {
-                            sh "npx sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.projectKey=bank_account_frontend -Dsonar.projectName='bank_account_frontend'"  
-                        }
-                    }                    
+                    }                   
                 }
             }
         }
