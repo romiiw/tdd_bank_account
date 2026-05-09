@@ -43,7 +43,7 @@ pipeline {
             steps {
                 sh '''
                     export DOCKER_HOST=tcp://172.17.0.2:2375
-                    docker build -t mosazhaw/devopsdemo .
+                    docker build -t romiiw1/devops_demo .
                 '''
             }
         }
