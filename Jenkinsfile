@@ -47,26 +47,6 @@ pipeline {
                 '''
             }
         }
-        stage('Docker Push') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'DockerHub-romiiw', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh '''
-                            docker login -u $USERNAME -p $PASSWORD
-                            docker push romiiw1/devops_demo
-                        '''
-                    }
-                }
-            }
-        }
-        stage('Trigger Render Deployment') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: 'DevopsRenderDeployKey', variable: 'KEY')]) {
-                        sh "curl https://api.render.com/deploy/$KEY"
-                    }
-                }
-            }
-        }
     }
 }
+
