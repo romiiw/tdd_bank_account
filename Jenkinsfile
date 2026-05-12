@@ -23,19 +23,7 @@ pipeline {
                     dir('frontend') {
                         sh 'npm install'
                         sh 'npm run lint:html'                    
-                    }
-                }
-                withCredentials([string(credentialsId: 'sonar-key-backend', variable: 'SONAR_TOKEN')]) {
-                    dir('backend') {
-                        sh "./gradlew sonar -Dsonar.projectKey=bank_account_backend1 -Dsonar.projectName=\'bank_account_backend1' -Dsonar.host.url=http://sonarqube:9000"    
-                    }                    
-                }
-                withCredentials([string(credentialsId: 'sonar-key-frontend', variable: 'SONAR_TOKEN')]) {
-                    dir('frontend') {
-                        nodejs('24.11.1') {
-                            sh "npx sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.projectKey=bank_account_frontend -Dsonar.projectName='bank_account_frontend'"  
-                        }
-                    }                    
+                    }                   
                 }
             }
         }
@@ -47,6 +35,31 @@ pipeline {
                 '''
             }
         }
+<<<<<<< HEAD
+=======
+        stage('Docker Push') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'DockerHub-romiiw', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh '''
+                            export DOCKER_HOST=tcp://172.17.0.2:2375
+                            docker login -u $USERNAME -p $PASSWORD
+                            docker push romiiw1/devops_demo
+                        '''
+                    }
+                }
+            }
+        }
+        stage('Trigger Render Deployment') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'DevopsRenderDeployKey', variable: 'KEY')]) {
+                        sh "curl https://api.render.com/deploy/$KEY"
+                    }
+                }
+            }
+        }
+>>>>>>> 196cc1ac1784b84bd7c0131f42f13013dba0fe56
     }
 }
 
